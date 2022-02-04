@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.8.1'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    //Servlet
+    compileOnly('javax.servlet:javax.servlet-api:4.0.1')
+    compileOnly group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version: '2.3.1'
+    implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+    implementation group: 'servlets.com', name: 'cos', version: '05Nov2002'
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+    //JSTL
+    implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+
+    //JSON.simple
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+    //Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    //OJDBC 8
+    implementation group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '21.4.0.0.1'
+
+    // https://mvnrepository.com/artifact/org.webjars.bower/jquery
+    implementation group: 'org.webjars.bower', name: 'jquery', version: '3.6.0'
+
+    //JSTL
+    implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+}
+
+test {
+    useJUnitPlatform()
+}
